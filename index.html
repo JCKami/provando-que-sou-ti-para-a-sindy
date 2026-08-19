@@ -2,198 +2,89 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Experiência Secreta 👀</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Borba Tech | Sistema de Diagnóstico</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{
-  min-height:100vh;font-family:Arial,Helvetica,sans-serif;
-  background:radial-gradient(circle at top,#24104a,#0b0715 55%,#05030a);
-  color:#fff;overflow:hidden;
-}
-.bg{position:fixed;inset:0;pointer-events:none;overflow:hidden}
-.orb{position:absolute;border-radius:50%;filter:blur(70px);opacity:.35;animation:float 8s ease-in-out infinite}
-.o1{width:260px;height:260px;background:#9b4dff;left:-70px;top:10%}
-.o2{width:220px;height:220px;background:#ff3d9d;right:-60px;bottom:8%;animation-delay:2s}
-.o3{width:170px;height:170px;background:#36d1ff;left:45%;top:45%;animation-delay:4s}
-@keyframes float{50%{transform:translate(30px,-25px) scale(1.12)}}
-
-.container{position:relative;z-index:2;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
-.card{
-  width:min(680px,94vw);min-height:500px;padding:38px 28px;
-  background:rgba(16,12,29,.78);border:1px solid rgba(255,255,255,.13);
-  border-radius:28px;box-shadow:0 25px 80px rgba(0,0,0,.45);
-  backdrop-filter:blur(18px);text-align:center;display:flex;flex-direction:column;
-  justify-content:center;align-items:center;
-}
-.badge{font-size:12px;letter-spacing:3px;color:#d7b7ff;text-transform:uppercase;margin-bottom:18px}
-h1{font-size:clamp(32px,7vw,58px);line-height:1.05;margin-bottom:18px}
-h2{font-size:clamp(25px,5vw,38px);margin-bottom:16px}
-p{color:#d6d1df;font-size:17px;line-height:1.6;max-width:540px}
-button{
-  border:0;border-radius:999px;padding:15px 27px;font-size:16px;font-weight:700;
-  cursor:pointer;transition:.25s;position:relative;
-}
-.primary{margin-top:28px;background:linear-gradient(90deg,#a855f7,#ec4899);color:white;box-shadow:0 10px 30px rgba(168,85,247,.28)}
-.primary:hover{transform:translateY(-3px) scale(1.03)}
-.secondary{background:#24202e;color:#fff}
-.actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:26px}
-.hidden{display:none!important}
-.progress{width:100%;height:5px;background:#292431;border-radius:10px;margin-bottom:30px;overflow:hidden}
-.progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,#a855f7,#ec4899);transition:width .5s}
-.question{font-size:25px;font-weight:700;margin:12px 0}
-.choice{width:min(440px,90vw);margin:8px 0;background:#201b2b;color:#fff;border:1px solid #3a3348}
-.choice:hover{background:#30263f;transform:translateY(-2px)}
-.result{font-size:58px;margin:15px}
-.small{font-size:13px;color:#91899f;margin-top:15px}
-#runaway{position:relative}
-.heart{position:fixed;font-size:20px;animation:rise 3s linear forwards;pointer-events:none}
-@keyframes rise{to{transform:translateY(-110vh) rotate(360deg);opacity:0}}
-.shake{animation:shake .45s}
-@keyframes shake{25%{transform:translateX(-7px)}50%{transform:translateX(7px)}75%{transform:translateX(-4px)}}
-.loader{width:230px;height:8px;background:#282230;border-radius:20px;overflow:hidden;margin:25px auto}
-.loader i{display:block;height:100%;width:0;background:linear-gradient(90deg,#8b5cf6,#ec4899);animation:load 2.4s forwards}
-@keyframes load{to{width:100%}}
-.final{font-size:20px}
-.final strong{color:#f6a8d2}
+:root{--green:#35ff8a;--cyan:#28d7fe;--bg:#030806;--panel:#07110c}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 50% 0,#0b2a18 0,#030806 45%,#010302 100%);color:#d9ffe7;font:15px Consolas,monospace;min-height:100vh;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;background:linear-gradient(rgba(53,255,138,.025) 1px,transparent 1px);background-size:100% 4px;opacity:.5}
+.wrap{min-height:100vh;display:grid;place-items:center;padding:24px}.app{width:min(920px,96vw);border:1px solid #1a7041;border-radius:16px;background:rgba(3,10,6,.88);box-shadow:0 0 70px #00ff5520, inset 0 0 30px #00ff5507;overflow:hidden}
+.top{padding:16px 20px;border-bottom:1px solid #164d2c;display:flex;justify-content:space-between;align-items:center}.brand{color:var(--green);font-weight:bold;letter-spacing:2px}.status{color:#7cffb0}.dot{display:inline-block;width:8px;height:8px;background:var(--green);border-radius:50%;box-shadow:0 0 12px var(--green);margin-right:7px}
+main{padding:30px}.hero{text-align:center;padding:35px 10px}.logo{font-size:14px;letter-spacing:5px;color:var(--cyan);margin-bottom:18px}.hero h1{font-size:clamp(32px,7vw,64px);margin:0;color:white;text-shadow:0 0 25px #35ff8a55}.hero h1 span{color:var(--green)}.hero p{color:#8ca997;max-width:620px;margin:18px auto;line-height:1.7}
+button{font:inherit;cursor:pointer;border:1px solid var(--green);background:#082514;color:var(--green);padding:14px 22px;border-radius:8px;transition:.2s;box-shadow:0 0 18px #35ff8a18}button:hover{background:#0d3c20;transform:translateY(-2px);box-shadow:0 0 25px #35ff8a35}.danger{border-color:#ff5b6e;color:#ff7d8c;background:#24090e}
+.hidden{display:none!important}.terminal{background:#020603;border:1px solid #174b2c;border-radius:10px;padding:18px;height:330px;overflow:auto;box-shadow:inset 0 0 25px #000}.line{margin:0 0 9px;color:#77c991}.line b{color:var(--green)}.cursor{display:inline-block;width:8px;height:15px;background:var(--green);animation:blink 1s infinite;vertical-align:middle}@keyframes blink{50%{opacity:0}}
+.progress{height:8px;background:#102017;border-radius:99px;overflow:hidden;margin:18px 0}.progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--green),var(--cyan));box-shadow:0 0 15px var(--green);transition:width .5s}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:18px 0}.box{padding:16px;border:1px solid #174b2c;background:#06100a;border-radius:9px}.label{color:#658272;font-size:12px}.value{color:#fff;font-size:20px;margin-top:7px}.ok{color:var(--green)}
+.result{text-align:center;padding:30px 10px}.score{font-size:70px;color:var(--green);text-shadow:0 0 35px #35ff8a66}.result h2{font-size:30px;color:#fff}.result p{color:#9ab3a2;line-height:1.7}.fake-note{font-size:11px;color:#557061;margin-top:18px}
+#particles{position:fixed;inset:0;pointer-events:none;z-index:-1}.p{position:absolute;color:#35ff8a88;font-size:12px;animation:fall linear infinite}@keyframes fall{from{transform:translateY(-30px)}to{transform:translateY(105vh)}}
+@media(max-width:650px){main{padding:18px}.grid{grid-template-columns:1fr}.terminal{height:290px}.top{font-size:12px}}
 </style>
 </head>
 <body>
-<div class="bg"><div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div></div>
+<div id="particles"></div>
+<div class="wrap"><div class="app">
+<header class="top"><div class="brand">BORBA TECH // LAB</div><div class="status"><span class="dot"></span>SISTEMA ONLINE</div></header>
+<main>
+<section id="home">
+<div class="hero"><div class="logo">DIGITAL DIAGNOSTIC SYSTEM v4.2</div><h1>Você duvida que eu sou<br><span>de T.I.?</span> 👀</h1><p>Então vamos resolver isso da maneira mais profissional possível: uma demonstração técnica completamente desnecessária… mas muito mais divertida. 😂</p><button onclick="start()">[ INICIAR DEMONSTRAÇÃO ]</button></div>
+</section>
 
-<div class="container">
-<div class="card" id="card">
+<section id="scan" class="hidden">
+<div class="terminal" id="terminal"></div>
+<div class="progress"><i id="bar"></i></div>
+<p id="phase" class="line">Aguardando módulo...</p>
+</section>
 
-  <section id="start">
-    <div class="badge">⚠ Experiência confidencial</div>
-    <h1>Ei, você… 👀</h1>
-    <p>Você foi selecionada para participar de uma experiência extremamente importante.</p>
-    <button class="primary" onclick="begin()">Aceitar o desafio</button>
-    <div class="small">Nenhum dado será coletado. Só sua dignidade está em risco. 😂</div>
-  </section>
-
-  <section id="loading" class="hidden">
-    <div class="badge">Inicializando protocolo</div>
-    <h2>Analisando seu perfil…</h2>
-    <div class="loader"><i></i></div>
-    <p id="loadText">Verificando nível de curiosidade…</p>
-  </section>
-
-  <section id="quiz" class="hidden">
-    <div class="progress"><span id="bar"></span></div>
-    <div class="badge" id="counter"></div>
-    <div class="question" id="question"></div>
-    <div id="choices"></div>
-  </section>
-
-  <section id="result" class="hidden">
-    <div class="badge">Resultado oficial</div>
-    <div class="result">🏆</div>
-    <h2>Resultado inconclusivo.</h2>
-    <p>Depois de uma análise extremamente científica, chegamos a uma conclusão:</p>
-    <p class="final"><strong>você é oficialmente uma pessoa que caiu nessa brincadeira. 😂</strong></p>
-    <button class="primary" onclick="reveal()">Mas afinal, por quê?</button>
-  </section>
-
-  <section id="reveal" class="hidden">
-    <div class="badge">Revelação</div>
-    <div class="result">😏</div>
-    <h2>Porque eu queria falar com você.</h2>
-    <p>Pronto. Todo esse suspense só para conseguir alguns minutos da sua atenção.</p>
-    <p style="margin-top:12px">E aparentemente funcionou. 👀</p>
-    <button class="primary" onclick="celebrate()">Tá… e agora?</button>
-  </section>
-
-  <section id="choice" class="hidden">
-    <div class="badge">Última pergunta</div>
-    <h2>Agora você decide.</h2>
-    <p>Quer deixar essa brincadeira por aqui?</p>
-    <div class="actions">
-      <button class="primary" onclick="yes()">Não 😏</button>
-      <button class="secondary" id="runaway" onmouseover="escapeButton()" onclick="escapeButton()">Sim</button>
-    </div>
-    <div class="small" id="escapeText"></div>
-  </section>
-
-  <section id="end" class="hidden">
-    <div class="result">❤️</div>
-    <h2>Sabia que você ia ficar.</h2>
-    <p>Agora você pode fechar essa página… ou me chamar para conversar. 😌</p>
-    <button class="primary" onclick="restart()">Começar de novo</button>
-  </section>
-
+<section id="dashboard" class="hidden">
+<div class="line"><b>✓ ANÁLISE CONCLUÍDA</b> — relatório técnico gerado.</div>
+<div class="grid">
+<div class="box"><div class="label">NÍVEL DE T.I.</div><div class="value ok">99.8%</div></div>
+<div class="box"><div class="label">CAOS CONTROLADO</div><div class="value">87.4%</div></div>
+<div class="box"><div class="label">CAFÉ NECESSÁRIO</div><div class="value">█████████░ 91%</div></div>
+<div class="box"><div class="label">PROBLEMAS RESOLVIDOS</div><div class="value ok">∞</div></div>
 </div>
+<div class="terminal" style="height:210px">
+<p class="line">[OK] Interface carregada</p><p class="line">[OK] Módulo de café ativado</p><p class="line">[OK] Capacidade de procurar solução no Google: <b>EXCELENTE</b></p><p class="line">[OK] Capacidade de dizer "reinicia que resolve": <b>CRÍTICA</b></p><p class="line">[OK] Status profissional: <b>APROVADO</b></p>
 </div>
+<div style="text-align:center;margin-top:20px"><button onclick="reveal()">[ VER CONCLUSÃO ]</button></div>
+</section>
 
+<section id="result" class="hidden result">
+<div class="score">99.8%</div><h2>Diagnóstico: DEV CONFIRMADO. 🧑‍💻</h2>
+<p>Após uma quantidade totalmente desnecessária de processamento, o sistema concluiu que existe evidência suficiente para afirmar que o indivíduo por trás desta página provavelmente é um cara de T.I.</p>
+<p><b style="color:var(--green)">E a melhor parte?</b><br>Ele gastou tempo fazendo um site só para provar isso para você. 😂</p>
+<button onclick="final()">[ AINDA NÃO ACREDITO ]</button>
+<div class="fake-note">*Isto é uma simulação visual. Nenhum dispositivo, conta ou dado foi acessado.</div>
+</section>
+
+<section id="final" class="hidden result">
+<div class="logo">BORBA TECH // FINAL MESSAGE</div><div class="score">404</div>
+<h2>FÉ NO DESENVOLVEDOR NÃO ENCONTRADA. 😂</h2>
+<p>Erro crítico: você continua duvidando.</p>
+<p style="color:var(--green)">Solução recomendada: aceitar que ele é de T.I. e seguir a vida. 😌</p>
+<button class="danger" onclick="location.reload()">[ EXECUTAR NOVAMENTE ]</button>
+</section>
+</main></div></div>
 <script>
-const screens=["start","loading","quiz","result","reveal","choice","end"];
-const questions=[
- {q:"Qual é o seu nível de curiosidade?",a:["Baixo 😇","Médio 👀","Perigosamente alto 😈"]},
- {q:"Se alguém te manda um link misterioso, você…",a:["Ignora","Abre na hora","Manda para uma amiga 😂"]},
- {q:"E se a pessoa por trás disso estiver querendo sua atenção?",a:["Talvez 👀","Com certeza 😏","Depende de quem é"]},
- {q:"Última chance de desistir. Quer continuar?",a:["Sim","Óbvio","Já cheguei até aqui 😂"]}
+const sections=["home","scan","dashboard","result","final"];
+function show(id){sections.forEach(x=>document.getElementById(x).classList.add("hidden"));document.getElementById(id).classList.remove("hidden")}
+const logs=[
+"> booting BORBA_TECH_DIAGNOSTIC...",
+"> carregando kernel de curiosidade...",
+"> inicializando módulo de análise visual...",
+"> verificando conhecimento técnico...",
+"> procurando evidências de T.I....",
+"> consultando banco de dados fictício...",
+"> compilando relatório...",
+"> otimizando café...",
+"> finalizando diagnóstico..."
 ];
-let current=0;
-
-function show(id){
- screens.forEach(s=>document.getElementById(s).classList.add("hidden"));
- document.getElementById(id).classList.remove("hidden");
-}
-function begin(){
- show("loading");
- const texts=["Verificando nível de curiosidade…","Comparando respostas inexistentes…","Calculando probabilidade de você cair na pegadinha…","Resultado encontrado."];
- let i=0;
- const timer=setInterval(()=>{
-   document.getElementById("loadText").textContent=texts[i++];
-   if(i===texts.length){clearInterval(timer);setTimeout(()=>{current=0;showQuiz()},500)}
- },650);
-}
-function showQuiz(){
- show("quiz");
- const x=questions[current];
- document.getElementById("question").textContent=x.q;
- document.getElementById("counter").textContent=`Pergunta ${current+1} de ${questions.length}`;
- document.getElementById("bar").style.width=((current)/questions.length*100)+"%";
- const box=document.getElementById("choices");box.innerHTML="";
- x.a.forEach((a)=>{
-   const b=document.createElement("button");
-   b.className="choice";b.textContent=a;
-   b.onclick=()=>answer();
-   box.appendChild(b);
- });
-}
-function answer(){
- current++;
- if(current<questions.length) showQuiz();
- else {show("result");document.getElementById("bar").style.width="100%"}
-}
-function reveal(){show("reveal")}
-function celebrate(){show("choice");hearts()}
-function escapeButton(){
- const b=document.getElementById("runaway");
- const maxX=Math.max(80,window.innerWidth/2-100);
- const maxY=Math.max(80,window.innerHeight/2-70);
- b.style.position="fixed";
- b.style.left=(Math.random()*maxX+30)+"px";
- b.style.top=(Math.random()*maxY+30)+"px";
- document.getElementById("escapeText").textContent="Hmm… esse botão parece estar com medo. 😂";
-}
-function yes(){show("end");hearts()}
-function hearts(){
- for(let i=0;i<24;i++){
-   setTimeout(()=>{
-     const h=document.createElement("div");h.className="heart";h.textContent=["❤️","💜","💖","✨","💕"][Math.floor(Math.random()*5)];
-     h.style.left=Math.random()*100+"vw";h.style.bottom="-30px";h.style.animationDuration=(2+Math.random()*2)+"s";
-     document.body.appendChild(h);setTimeout(()=>h.remove(),4000);
-   },i*90);
- }
-}
-function restart(){
- document.getElementById("runaway").style.position="relative";
- document.getElementById("runaway").style.left="";
- document.getElementById("runaway").style.top="";
- show("start");
-}
+function start(){show("scan");let box=document.getElementById("terminal"),bar=document.getElementById("bar"),phase=document.getElementById("phase"),i=0;
+let t=setInterval(()=>{let p=document.createElement("p");p.className="line";p.textContent=logs[i];box.appendChild(p);box.scrollTop=box.scrollHeight;i++;bar.style.width=(i/logs.length*100)+"%";phase.textContent=["Analisando...","Processando...","Compilando...","Quase lá..."][i%4];
+if(i>=logs.length){clearInterval(t);setTimeout(()=>show("dashboard"),700)}},430)}
+function reveal(){show("result")}
+function final(){show("final")}
+for(let i=0;i<45;i++){let e=document.createElement("span");e.className="p";e.textContent=["01","10","<>","{}","//","$"][Math.floor(Math.random()*6)];e.style.left=Math.random()*100+"%";e.style.animationDuration=(5+Math.random()*10)+"s";e.style.animationDelay=(-Math.random()*12)+"s";document.getElementById("particles").appendChild(e)}
 </script>
 </body>
 </html>

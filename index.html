@@ -1,185 +1,199 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Ghost Tech - Borba Tech</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Experiência Secreta 👀</title>
 <style>
-  :root{
-    --bg:#0b1220;
-    --card:#0f1724;
-    --accent:#ff3b30;
-    --muted:#9aa4b2;
-  }
-  *{box-sizing:border-box;font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif}
-  html,body{height:100%;margin:0;background:linear-gradient(180deg,#071022,#021018);color:#eef3f8}
-  .wrap{min-height:100%;display:flex;align-items:center;justify-content:center;padding:28px}
-  .card{width:100%;max-width:720px;background:rgba(255,255,255,0.02);padding:28px;border-radius:12px;text-align:center;border:1px solid rgba(255,255,255,0.03);box-shadow:0 10px 30px rgba(2,6,23,0.6)}
-  h1{margin:0;font-size:24px}
-  p{color:var(--muted)}
-  .btn{margin-top:18px;padding:10px 14px;border-radius:8px;border:0;background:linear-gradient(90deg,#7b61ff,#ff5c8a);color:white;font-weight:700;cursor:pointer}
-  /* tela de susto (fullscreen) */
-  .scare {
-    position:fixed;left:0;top:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;
-    background:var(--accent);color:white;flex-direction:column;z-index:9999;
-    transform:scale(0.98);opacity:0;
-    transition:transform .12s ease-out,opacity .12s ease-out;
-  }
-  .scare.show{transform:scale(1);opacity:1;}
-  .scare h2{font-size:96px;margin:0;letter-spacing:6px;text-shadow:0 8px 30px rgba(0,0,0,0.4)}
-  .scare p{font-size:20px;margin-top:10px}
-  /* efeito shake */
-  @keyframes shake {
-    0%{transform:translateX(0)}
-    10%{transform:translateX(-18px)}
-    20%{transform:translateX(14px)}
-    30%{transform:translateX(-10px)}
-    40%{transform:translateX(8px)}
-    50%{transform:translateX(-6px)}
-    60%{transform:translateX(4px)}
-    70%{transform:translateX(-2px)}
-    100%{transform:translateX(0)}
-  }
-  .scare.show h2{animation:shake .6s cubic-bezier(.36,.07,.19,.97) 0s both}
-  .small-note{margin-top:12px;color:var(--muted);font-size:13px}
-  .controls{margin-top:14px;display:flex;gap:8px;justify-content:center}
-  .ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted);padding:8px 10px;border-radius:8px;cursor:pointer}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  min-height:100vh;font-family:Arial,Helvetica,sans-serif;
+  background:radial-gradient(circle at top,#24104a,#0b0715 55%,#05030a);
+  color:#fff;overflow:hidden;
+}
+.bg{position:fixed;inset:0;pointer-events:none;overflow:hidden}
+.orb{position:absolute;border-radius:50%;filter:blur(70px);opacity:.35;animation:float 8s ease-in-out infinite}
+.o1{width:260px;height:260px;background:#9b4dff;left:-70px;top:10%}
+.o2{width:220px;height:220px;background:#ff3d9d;right:-60px;bottom:8%;animation-delay:2s}
+.o3{width:170px;height:170px;background:#36d1ff;left:45%;top:45%;animation-delay:4s}
+@keyframes float{50%{transform:translate(30px,-25px) scale(1.12)}}
+
+.container{position:relative;z-index:2;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+.card{
+  width:min(680px,94vw);min-height:500px;padding:38px 28px;
+  background:rgba(16,12,29,.78);border:1px solid rgba(255,255,255,.13);
+  border-radius:28px;box-shadow:0 25px 80px rgba(0,0,0,.45);
+  backdrop-filter:blur(18px);text-align:center;display:flex;flex-direction:column;
+  justify-content:center;align-items:center;
+}
+.badge{font-size:12px;letter-spacing:3px;color:#d7b7ff;text-transform:uppercase;margin-bottom:18px}
+h1{font-size:clamp(32px,7vw,58px);line-height:1.05;margin-bottom:18px}
+h2{font-size:clamp(25px,5vw,38px);margin-bottom:16px}
+p{color:#d6d1df;font-size:17px;line-height:1.6;max-width:540px}
+button{
+  border:0;border-radius:999px;padding:15px 27px;font-size:16px;font-weight:700;
+  cursor:pointer;transition:.25s;position:relative;
+}
+.primary{margin-top:28px;background:linear-gradient(90deg,#a855f7,#ec4899);color:white;box-shadow:0 10px 30px rgba(168,85,247,.28)}
+.primary:hover{transform:translateY(-3px) scale(1.03)}
+.secondary{background:#24202e;color:#fff}
+.actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:26px}
+.hidden{display:none!important}
+.progress{width:100%;height:5px;background:#292431;border-radius:10px;margin-bottom:30px;overflow:hidden}
+.progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,#a855f7,#ec4899);transition:width .5s}
+.question{font-size:25px;font-weight:700;margin:12px 0}
+.choice{width:min(440px,90vw);margin:8px 0;background:#201b2b;color:#fff;border:1px solid #3a3348}
+.choice:hover{background:#30263f;transform:translateY(-2px)}
+.result{font-size:58px;margin:15px}
+.small{font-size:13px;color:#91899f;margin-top:15px}
+#runaway{position:relative}
+.heart{position:fixed;font-size:20px;animation:rise 3s linear forwards;pointer-events:none}
+@keyframes rise{to{transform:translateY(-110vh) rotate(360deg);opacity:0}}
+.shake{animation:shake .45s}
+@keyframes shake{25%{transform:translateX(-7px)}50%{transform:translateX(7px)}75%{transform:translateX(-4px)}}
+.loader{width:230px;height:8px;background:#282230;border-radius:20px;overflow:hidden;margin:25px auto}
+.loader i{display:block;height:100%;width:0;background:linear-gradient(90deg,#8b5cf6,#ec4899);animation:load 2.4s forwards}
+@keyframes load{to{width:100%}}
+.final{font-size:20px}
+.final strong{color:#f6a8d2}
 </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="card" role="main">
-      <h1>Um pequeno teste de coragem</h1>
-      <p>Fique tranquilo — é só uma brincadeira. Clique no botão abaixo ou espere alguns segundos para a surpresa.</p>
-      <div class="controls">
-        <button class="btn" id="startBtn">Ver a surpresa</button>
-        <button class="ghost" id="cancelBtn">Cancelar</button>
-      </div>
-      <p class="small-note">Compartilhe com cuidado 😉</p>
-    </div>
-  </div>
+<div class="bg"><div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div></div>
 
-  <!-- Layer do susto -->
-  <div id="scare" class="scare" aria-hidden="true">
-    <h2 id="scareText">BOO!</h2>
-    <p id="scareSub">Você foi pego!</p>
-    <div style="margin-top:18px">
-      <button class="ghost" id="muteBtn">Desativar Som</button>
-      <button class="ghost" id="closeBtn">Fechar</button>
+<div class="container">
+<div class="card" id="card">
+
+  <section id="start">
+    <div class="badge">⚠ Experiência confidencial</div>
+    <h1>Ei, você… 👀</h1>
+    <p>Você foi selecionada para participar de uma experiência extremamente importante.</p>
+    <button class="primary" onclick="begin()">Aceitar o desafio</button>
+    <div class="small">Nenhum dado será coletado. Só sua dignidade está em risco. 😂</div>
+  </section>
+
+  <section id="loading" class="hidden">
+    <div class="badge">Inicializando protocolo</div>
+    <h2>Analisando seu perfil…</h2>
+    <div class="loader"><i></i></div>
+    <p id="loadText">Verificando nível de curiosidade…</p>
+  </section>
+
+  <section id="quiz" class="hidden">
+    <div class="progress"><span id="bar"></span></div>
+    <div class="badge" id="counter"></div>
+    <div class="question" id="question"></div>
+    <div id="choices"></div>
+  </section>
+
+  <section id="result" class="hidden">
+    <div class="badge">Resultado oficial</div>
+    <div class="result">🏆</div>
+    <h2>Resultado inconclusivo.</h2>
+    <p>Depois de uma análise extremamente científica, chegamos a uma conclusão:</p>
+    <p class="final"><strong>você é oficialmente uma pessoa que caiu nessa brincadeira. 😂</strong></p>
+    <button class="primary" onclick="reveal()">Mas afinal, por quê?</button>
+  </section>
+
+  <section id="reveal" class="hidden">
+    <div class="badge">Revelação</div>
+    <div class="result">😏</div>
+    <h2>Porque eu queria falar com você.</h2>
+    <p>Pronto. Todo esse suspense só para conseguir alguns minutos da sua atenção.</p>
+    <p style="margin-top:12px">E aparentemente funcionou. 👀</p>
+    <button class="primary" onclick="celebrate()">Tá… e agora?</button>
+  </section>
+
+  <section id="choice" class="hidden">
+    <div class="badge">Última pergunta</div>
+    <h2>Agora você decide.</h2>
+    <p>Quer deixar essa brincadeira por aqui?</p>
+    <div class="actions">
+      <button class="primary" onclick="yes()">Não 😏</button>
+      <button class="secondary" id="runaway" onmouseover="escapeButton()" onclick="escapeButton()">Sim</button>
     </div>
-  </div>
+    <div class="small" id="escapeText"></div>
+  </section>
+
+  <section id="end" class="hidden">
+    <div class="result">❤️</div>
+    <h2>Sabia que você ia ficar.</h2>
+    <p>Agora você pode fechar essa página… ou me chamar para conversar. 😌</p>
+    <button class="primary" onclick="restart()">Começar de novo</button>
+  </section>
+
+</div>
+</div>
 
 <script>
-/*
-  Single-file "jump scare" leve:
-  - Pode ser ativado por clique (recomendado — navegadores exigem gesto para tocar som).
-  - Também tenta ativar automaticamente após X segundos; se o áudio for bloqueado, aparece botão pra tocar som.
-  - Use com responsabilidade.
-*/
-const startBtn = document.getElementById('startBtn');
-const cancelBtn = document.getElementById('cancelBtn');
-const scare = document.getElementById('scare');
-const closeBtn = document.getElementById('closeBtn');
-const muteBtn = document.getElementById('muteBtn');
+const screens=["start","loading","quiz","result","reveal","choice","end"];
+const questions=[
+ {q:"Qual é o seu nível de curiosidade?",a:["Baixo 😇","Médio 👀","Perigosamente alto 😈"]},
+ {q:"Se alguém te manda um link misterioso, você…",a:["Ignora","Abre na hora","Manda para uma amiga 😂"]},
+ {q:"E se a pessoa por trás disso estiver querendo sua atenção?",a:["Talvez 👀","Com certeza 😏","Depende de quem é"]},
+ {q:"Última chance de desistir. Quer continuar?",a:["Sim","Óbvio","Já cheguei até aqui 😂"]}
+];
+let current=0;
 
-let autoTimer = null;
-let soundEnabled = true;
-let audioAllowed = false; // será verdadeiro se o áudio tocar com sucesso
-
-// Cria um som breve (WebAudio) — ruído curto e impacto
-const AudioContext = window.AudioContext || window.webkitAudioContext;
-let actx = null;
-function playScareSound(){
-  try{
-    if(!AudioContext) return false;
-    if(!actx) actx = new AudioContext();
-    const now = actx.currentTime;
-    // criar ruído branco com envelope curto
-    const bufferSize = 2 * actx.sampleRate;
-    const buffer = actx.createBuffer(1, bufferSize, actx.sampleRate);
-    const data = buffer.getChannelData(0);
-    for(let i=0;i<bufferSize;i++){
-      // ruído com envelope
-      data[i] = (Math.random()*2-1) * Math.exp(-i/(0.5*actx.sampleRate));
-    }
-    const noise = actx.createBufferSource();
-    noise.buffer = buffer;
-
-    // filtro para dar "impacto"
-    const band = actx.createBiquadFilter();
-    band.type = 'highpass';
-    band.frequency.value = 600;
-    band.Q.value = 0.7;
-
-    // gain envelope
-    const gain = actx.createGain();
-    gain.gain.setValueAtTime(0.0001, now);
-    gain.gain.exponentialRampToValueAtTime(1.2, now + 0.02);
-    gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.35);
-
-    noise.connect(band);
-    band.connect(gain);
-    gain.connect(actx.destination);
-
-    noise.start(now);
-    noise.stop(now + 0.5);
-    return true;
-  }catch(e){
-    return false;
-  }
+function show(id){
+ screens.forEach(s=>document.getElementById(s).classList.add("hidden"));
+ document.getElementById(id).classList.remove("hidden");
 }
-
-function showScare(withSoundAttempt = true){
-  // mostra visual
-  scare.setAttribute('aria-hidden', 'false');
-  requestAnimationFrame(()=> scare.classList.add('show'));
-  // tenta tocar som
-  if(soundEnabled && withSoundAttempt){
-    const played = playScareSound();
-    if(played) audioAllowed = true;
-  }
+function begin(){
+ show("loading");
+ const texts=["Verificando nível de curiosidade…","Comparando respostas inexistentes…","Calculando probabilidade de você cair na pegadinha…","Resultado encontrado."];
+ let i=0;
+ const timer=setInterval(()=>{
+   document.getElementById("loadText").textContent=texts[i++];
+   if(i===texts.length){clearInterval(timer);setTimeout(()=>{current=0;showQuiz()},500)}
+ },650);
 }
-
-function hideScare(){
-  scare.classList.remove('show');
-  setTimeout(()=> scare.setAttribute('aria-hidden','true'), 300);
+function showQuiz(){
+ show("quiz");
+ const x=questions[current];
+ document.getElementById("question").textContent=x.q;
+ document.getElementById("counter").textContent=`Pergunta ${current+1} de ${questions.length}`;
+ document.getElementById("bar").style.width=((current)/questions.length*100)+"%";
+ const box=document.getElementById("choices");box.innerHTML="";
+ x.a.forEach((a)=>{
+   const b=document.createElement("button");
+   b.className="choice";b.textContent=a;
+   b.onclick=()=>answer();
+   box.appendChild(b);
+ });
 }
-
-// eventos
-startBtn.addEventListener('click', (e)=>{
-  // cancelar timer se existir
-  if(autoTimer) { clearTimeout(autoTimer); autoTimer = null; }
-  // tentar ativar áudio — necessário gesto do usuário
-  const ok = playScareSound();
-  if(ok) audioAllowed = true;
-  showScare(!ok ? false : true);
-});
-
-cancelBtn.addEventListener('click', ()=>{
-  if(autoTimer){ clearTimeout(autoTimer); autoTimer = null; alert('Surpresa cancelada.'); }
-  else alert('Nenhum timer ativo — clique em "Ver a surpresa" para ver.');
-});
-
-closeBtn.addEventListener('click', hideScare);
-
-muteBtn.addEventListener('click', ()=>{
-  soundEnabled = false;
-  alert('Som desativado.');
-});
-
-// tentativa automática após 5s (apenas visual se áudio bloqueado)
-autoTimer = setTimeout(()=>{
-  // ao tentar tocar antes de interação, muitos navegadores bloquearão; ainda assim mostramos visual.
-  const played = playScareSound();
-  if(played) audioAllowed = true;
-  showScare(!played ? false : true);
-  autoTimer = null;
-}, 5000);
-
-// Se quiser personalizar os textos, altere estes valores:
-document.getElementById('scareText').textContent = 'BOO!';
-document.getElementById('scareSub').textContent = 'Peguei você!';
-
+function answer(){
+ current++;
+ if(current<questions.length) showQuiz();
+ else {show("result");document.getElementById("bar").style.width="100%"}
+}
+function reveal(){show("reveal")}
+function celebrate(){show("choice");hearts()}
+function escapeButton(){
+ const b=document.getElementById("runaway");
+ const maxX=Math.max(80,window.innerWidth/2-100);
+ const maxY=Math.max(80,window.innerHeight/2-70);
+ b.style.position="fixed";
+ b.style.left=(Math.random()*maxX+30)+"px";
+ b.style.top=(Math.random()*maxY+30)+"px";
+ document.getElementById("escapeText").textContent="Hmm… esse botão parece estar com medo. 😂";
+}
+function yes(){show("end");hearts()}
+function hearts(){
+ for(let i=0;i<24;i++){
+   setTimeout(()=>{
+     const h=document.createElement("div");h.className="heart";h.textContent=["❤️","💜","💖","✨","💕"][Math.floor(Math.random()*5)];
+     h.style.left=Math.random()*100+"vw";h.style.bottom="-30px";h.style.animationDuration=(2+Math.random()*2)+"s";
+     document.body.appendChild(h);setTimeout(()=>h.remove(),4000);
+   },i*90);
+ }
+}
+function restart(){
+ document.getElementById("runaway").style.position="relative";
+ document.getElementById("runaway").style.left="";
+ document.getElementById("runaway").style.top="";
+ show("start");
+}
 </script>
 </body>
 </html>
